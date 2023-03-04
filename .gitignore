@@ -1,0 +1,9 @@
+# Google App Engine generated folder
+appengine-generated/
+
+x64/
+*.sln
+*.user
+*.filters
+*.filters
+*.vs
