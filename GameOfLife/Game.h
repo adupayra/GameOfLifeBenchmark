@@ -7,12 +7,12 @@ class Game
 private:
 	int dimension;
 	int nbCells;
+	uint8_t* cells;
 	std::vector<int> cellsToChange;
 	LifeRules* rules;
 
 public:
-	uint8_t* cells;
-
+	
 	Game(int, int, LifeRules*);
 
 	void initGrid();

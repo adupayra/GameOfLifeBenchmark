@@ -1,6 +1,7 @@
 #include "GameManager.h"
 #include "ClassicRules.h"
-#include "GraphicsDisplay.h"
+#include "TextDisplay.h"
+#include "GraphicDisplay.h"
 
 GameManager::GameManager(int dimensions, int cellsPerDim) {
 	if (dimensions != 3 && dimensions != 2) {
@@ -8,21 +9,20 @@ GameManager::GameManager(int dimensions, int cellsPerDim) {
 	}
 	GameManager::gameInstance = new Game(dimensions, cellsPerDim, new ClassicRules(dimensions, cellsPerDim));
 	//GameManager::gameView = new TextDisplay(cellsPerDim);
-	GameManager::graphicsDisplay = new GraphicsDisplay(512, 512, dimensions, cellsPerDim);
+	GameManager::gameView = new GraphicDisplay(dimensions, cellsPerDim);
 
 	gameInstance->initGrid();
 
-	run();
 }
 
 GameManager::~GameManager() {
 	delete gameInstance;
-	delete graphicsDisplay;
+	delete gameView;
 }
 
 void GameManager::run() {
-	while (!graphicsDisplay->windowManager->isClosedState()) {
+	while (true) {
 		gameInstance->step();
-		graphicsDisplay->update(gameInstance->cells);
+
 	}
 }
