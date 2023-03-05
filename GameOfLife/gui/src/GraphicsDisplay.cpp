@@ -46,7 +46,8 @@ void GraphicsDisplay::update(uint8_t* cells)
 
 GraphicsDisplay::~GraphicsDisplay()
 {
-
+	delete windowManager;
+	delete shaderManager;
 }
 
 void GraphicsDisplay::draw(uint8_t* cells) {
