@@ -30,9 +30,9 @@ GraphicsDisplay::GraphicsDisplay(int width, int height, int dimension, int cells
 	glEnable(GL_DEBUG_OUTPUT);
 	glDebugMessageCallback(openglMessageCallback, 0);
 
-	GraphicsDisplay::shaderManager = new Shader();
-
 	initViewport();
+	GraphicsDisplay::shaderManager = NULL;
+	initShaderManager();
 	shaderManager->use();
 }
 
@@ -47,10 +47,7 @@ void GraphicsDisplay::update(uint8_t* cells)
 GraphicsDisplay::~GraphicsDisplay()
 {
 	delete windowManager;
-	delete shaderManager;
-}
-
-void GraphicsDisplay::draw(uint8_t* cells) {
-
+	if(shaderManager != NULL)
+		delete shaderManager;
 }
 

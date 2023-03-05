@@ -1,13 +1,15 @@
 #include "GameManager.h"
 #include "ClassicRules.h"
-#include "GraphicsDisplay.h"
+#include "Graphics2D.h"
 
-GameManager::GameManager(int dimensions, int cellsPerDim) {
-	if (dimensions != 3 && dimensions != 2) {
+GameManager::GameManager(int dimension, int cellsPerDim) {
+	if (dimension != 3 && dimension != 2) {
 		throw "Dimensions different than 2 and 3 are not handled";
 	}
-	GameManager::gameInstance = new Game(dimensions, cellsPerDim, new ClassicRules(dimensions, cellsPerDim));
-	GameManager::graphicsDisplay = new GraphicsDisplay(512, 512, dimensions, cellsPerDim);
+	GameManager::gameInstance = new Game(dimension, cellsPerDim, new ClassicRules(dimension, cellsPerDim));
+
+	if(dimension == 2)
+		GameManager::graphicsDisplay = new Graphics2D(600, 512, dimension, cellsPerDim);
 
 	gameInstance->initGrid();
 

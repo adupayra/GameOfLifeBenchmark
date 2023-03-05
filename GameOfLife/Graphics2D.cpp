@@ -1,5 +1,10 @@
 #include "Graphics2D.h"
 
+void Graphics2D::initShaderManager()
+{
+	Graphics2D::shaderManager = new Shader(vs, fs);
+}
+
 void Graphics2D::draw(uint8_t*)
 {
 }

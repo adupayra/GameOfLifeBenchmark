@@ -7,12 +7,15 @@ class GraphicsDisplay
 {
 private:
 	void initViewport();
-	Shader* shaderManager;
 
 protected:
 	int dimension;
 	int cellsPerDim;
-	virtual void draw(uint8_t*);
+	virtual void draw(uint8_t*) = 0;
+	virtual void initShaderManager() = 0;
+	Shader* shaderManager;
+
+
 public:
 
 	WindowManager* windowManager;
