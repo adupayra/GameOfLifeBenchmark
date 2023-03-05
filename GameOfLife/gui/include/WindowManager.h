@@ -13,6 +13,8 @@ private:
 public:
 	WindowManager(int, int, const char*);
 
+	WindowManager() = default;
+
 	~WindowManager();
 
 	GLFWwindow* getWindow() { return wind; }
