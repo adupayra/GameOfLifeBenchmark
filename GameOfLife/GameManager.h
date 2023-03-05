@@ -1,12 +1,12 @@
 #pragma once
 
-#include "GameView.h"
+#include "GraphicsDisplay.h"
 #include "Game.h"
 
 class GameManager
 {
 private:
-	GameView* gameView;
+	GraphicsDisplay* graphicsDisplay;
 
 	Game* gameInstance;
 
