@@ -7,7 +7,6 @@ GameManager::GameManager(int dimensions, int cellsPerDim) {
 		throw "Dimensions different than 2 and 3 are not handled";
 	}
 	GameManager::gameInstance = new Game(dimensions, cellsPerDim, new ClassicRules(dimensions, cellsPerDim));
-	//GameManager::gameView = new TextDisplay(cellsPerDim);
 	GameManager::graphicsDisplay = new GraphicsDisplay(512, 512, dimensions, cellsPerDim);
 
 	gameInstance->initGrid();
