@@ -35,7 +35,7 @@ public:
 
 	void show();
 
-	bool getCloseState();
+	bool isClosedState();
 
 };
 

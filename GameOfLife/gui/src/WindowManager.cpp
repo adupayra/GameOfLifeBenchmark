@@ -66,7 +66,7 @@ void WindowManager::show()
 	glfwShowWindow(wind);
 }
 
-bool WindowManager::getCloseState()
+bool WindowManager::isClosedState()
 {
 	return glfwWindowShouldClose(wind);
 }
