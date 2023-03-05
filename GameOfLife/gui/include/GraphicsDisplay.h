@@ -7,17 +7,19 @@ class GraphicsDisplay
 {
 private:
 	void initViewport();
-	Shader shaderManager;
-	void update(std::vector<bool>);
+	Shader* shaderManager;
 
 protected:
 	int dimension;
 	int cellsPerDim;
-	virtual void draw(std::vector<int>);
+	virtual void draw(uint8_t*);
 public:
-	WindowManager windowManager;
+
+	WindowManager* windowManager;
 
 	GraphicsDisplay(int, int, int, int);
+	void update(uint8_t*);
+
 	~GraphicsDisplay();
 
 	static void GLAPIENTRY openglMessageCallback(GLenum source,
