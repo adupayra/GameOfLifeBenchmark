@@ -12,7 +12,6 @@ protected:
 	int dimension;
 	int cellsPerDim;
 	virtual void draw(uint8_t*) = 0;
-	virtual void initShaderManager() = 0;
 	Shader* shaderManager;
 
 

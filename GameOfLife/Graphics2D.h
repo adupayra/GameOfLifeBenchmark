@@ -31,8 +31,6 @@ private:
 		"	FragColor = texture(sampleTexture, texCoords);\n"
 		"}\0";
 
-	void initShaderManager();
-
 	void draw(uint8_t*);
 
 	float vertices[12] = {

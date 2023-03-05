@@ -32,7 +32,6 @@ GraphicsDisplay::GraphicsDisplay(int width, int height, int dimension, int cells
 
 	initViewport();
 	GraphicsDisplay::shaderManager = NULL;
-	initShaderManager();
 	shaderManager->use();
 }
 
