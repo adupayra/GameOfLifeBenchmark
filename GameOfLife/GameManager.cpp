@@ -9,7 +9,7 @@ GameManager::GameManager(int dimensions, int cellsPerDim) {
 	}
 	GameManager::gameInstance = new Game(dimensions, cellsPerDim, new ClassicRules(dimensions, cellsPerDim));
 	//GameManager::gameView = new TextDisplay(cellsPerDim);
-	GameManager::gameView = new GraphicDisplay();
+	GameManager::gameView = new GraphicDisplay(dimensions, cellsPerDim);
 
 	gameInstance->initGrid();
 

@@ -1,17 +1,14 @@
 #pragma once
-#include "GameView.h"
-class GraphicDisplay :
-    public GameView
+#include <vector>
+
+class GraphicDisplay
 {
+protected:
+	int dimension;
+	int cellsPerDim;
 public:
-	GraphicDisplay();
-
-	void update(std::vector<bool>) override;
-
+	GraphicDisplay(int, int);
+	virtual void update(std::vector<bool>);
 	~GraphicDisplay();
-
-	void initView() override;
-
-	int test();
 };
 
