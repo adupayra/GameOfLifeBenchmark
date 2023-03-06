@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-void Graphics2D::draw(uint8_t* cells)
+void Graphics2D::draw(const uint8_t* cells)
 {
 	generateTexture(cells);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -40,7 +40,7 @@ Graphics2D::Graphics2D(int width, int height, int dimension, int cellsPerDim) : 
 
 }
 
-void Graphics2D::generateTexture(uint8_t* cells)
+void Graphics2D::generateTexture(const uint8_t* cells)
 {
 	uint8_t value = 0;
 	int j = 0;

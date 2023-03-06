@@ -16,11 +16,9 @@ private:
 
 public:
 	
-	uint8_t* getCells() { return cells; }
+	const uint8_t* getCells() { return cells; }
 
 	Game(int, int, ProcessMode);
-	
-	void process(uint8_t* cells, int nbCells);
 
 	static std::vector<int> getNeighbours(int cell, int cellsPerDim);
 

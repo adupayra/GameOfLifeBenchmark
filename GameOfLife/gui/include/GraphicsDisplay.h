@@ -12,7 +12,7 @@ protected:
 	int dimension;
 	int cellsPerDim;
 	int nbCells;
-	virtual void draw(uint8_t*) = 0;
+	virtual void draw(const uint8_t*) = 0;
 	Shader* shaderManager;
 
 
@@ -21,7 +21,7 @@ public:
 	WindowManager* windowManager;
 
 	GraphicsDisplay(int, int, int, int);
-	void render(uint8_t*);
+	void render(const uint8_t*);
 
 	~GraphicsDisplay();
 

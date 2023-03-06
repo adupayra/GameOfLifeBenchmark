@@ -27,26 +27,16 @@ private:
 		"	FragColor = texture(sampleTexture, texCoords);\n"
 		"}\0";
 
-	void draw(uint8_t*);
+	void draw(const uint8_t*);
 
-	/*float vertices[20] = {
-		-1.0f, 1.0f, 0.0f,	0.0f, 1.0f,
-		-1.0f, -1.0f, 0.0f,	0.0f, 0.0f,
-		1.0f, 1.0f, 0.0f,	1.0f, 1.0f,
-		1.0f, -1.0f, 0.0f,	1.0f, 0.0f
-	};*/
 
 	float vertices[20] = {
-		// positions          // colors           // texture coords
-		 1.0f,  1.0f, 0.0f,   1.0f, 1.0f,   // top right
-		 1.0f, -1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-		-1.0f, -1.0f, 0.0f,    0.0f, 0.0f,   // bottom left
-		-1.0f,  1.0f, 0.0f,   0.0f, 1.0f    // top left 
+		 1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 
+		 1.0f, -1.0f, 0.0f,   1.0f, 0.0f, 
+		-1.0f, -1.0f, 0.0f,    0.0f, 0.0f,  
+		-1.0f,  1.0f, 0.0f,   0.0f, 1.0f    
 	};
 
-	//unsigned int indices[6] = {
-	//	0, 1, 3, 0, 3, 2
-	//};
 
 	unsigned int indices[6] = {
 	0, 1, 2, 0, 2, 3
@@ -60,7 +50,7 @@ private:
 	GLuint textureID;	
 	
 	uint8_t* textureData;
-	void generateTexture(uint8_t* cells);
+	void generateTexture(const uint8_t* cells);
 
 
 
