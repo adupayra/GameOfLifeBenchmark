@@ -6,7 +6,6 @@
 #include <stdlib.h>
 
 GameManager::GameManager(int dimension, int cellsPerDim) {
-	srand(31231);
 
 	if (dimension != 3 && dimension != 2) {
 		throw "Dimensions different than 2 and 3 are not handled";
@@ -44,7 +43,7 @@ void GameManager::run() {
 		std::cout << "Cells update time: " << ms_double.count() << "ms\n";
 		system("CLS");
 
-		graphicsDisplay->render(gameInstance->cells);
+		graphicsDisplay->render(gameInstance->getCells());
 		i++;
 	}
 }

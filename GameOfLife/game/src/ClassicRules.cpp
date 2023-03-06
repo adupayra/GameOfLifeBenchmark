@@ -1,7 +1,7 @@
 #include "ClassicRules.h"
 #include <iostream>
 
-std::vector<int> ClassicRules::process(uint8_t* cells, int nbCells) {
+void ClassicRules::process(uint8_t* cells, int nbCells) {
 	std::vector<int> cellsToChange;
 	std::vector<int> neighbours;
 	std::vector<int> deadCellsNeighbours;
@@ -35,5 +35,14 @@ std::vector<int> ClassicRules::process(uint8_t* cells, int nbCells) {
 		}
 	}
 
-	return cellsToChange;
+	int j = 0;
+	for (int i = 0; i < cellsToChange.size(); ++i) {
+		j = cellsToChange[i];
+		cells[j] = 1 - cells[j];
+	}
+}
+
+bool ClassicRules::isAlive(uint8_t cell, int nbNeighbours)
+{
+	return false;
 }
