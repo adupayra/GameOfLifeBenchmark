@@ -11,7 +11,7 @@ private:
 	Game* gameInstance;
 
 public:
-	GameManager(int, int);
+	GameManager(int, int, ProcessMode);
 
 	void run();
 	

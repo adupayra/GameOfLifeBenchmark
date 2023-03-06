@@ -1,5 +1,6 @@
 #pragma once
 #include "LifeRules.h"
+#include "ProcessBase.h"
 #include <vector>
 
 class Game
@@ -9,7 +10,7 @@ private:
 	int nbCells;
 	int cellsPerDim;
 	std::vector<int> cellsToChange;
-	LifeRules* rules;
+	ProcessBase *processType;
 	uint8_t* cells;
 
 
@@ -17,11 +18,11 @@ public:
 	
 	uint8_t* getCells() { return cells; }
 
-	Game(int, int, LifeRules*);
+	Game(int, int, ProcessMode);
 	
 	void process(uint8_t* cells, int nbCells);
 
-	std::vector<int> getNeighbours(int cell);
+	static std::vector<int> getNeighbours(int cell, int cellsPerDim);
 
 	void initGrid();
 

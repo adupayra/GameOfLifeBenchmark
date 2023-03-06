@@ -2,6 +2,6 @@
 
 int main(int argc, const char* argv) {
 	srand(31231);
-	GameManager gameManager(2, 128);
+	GameManager gameManager(2, 128, CPU);
 	gameManager.run();
 }

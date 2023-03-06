@@ -2,21 +2,35 @@
 #include <random>
 #include <cmath>
 #include <iostream>
+#include "ClassicRules2D.h"
+#include "ProcessCPU.h"
+#include "ProcessCPUmulti.h"
+#include "ProcessGPU.h"
 
-Game::Game(int dimension, int cellsPerDim, LifeRules* rules) {
+Game::Game(int dimension, int cellsPerDim, ProcessMode processMode) {
 	Game::dimension = dimension;
 	Game::cellsPerDim = cellsPerDim;
 	Game::nbCells = pow(cellsPerDim, dimension);
-	Game::rules = rules;
+	LifeRules* rules = NULL;
+	Game::processType = NULL;
+
+	if(dimension == 2)
+		rules = new ClassicRules2D();
+	switch (processMode) {
+	case CPU:
+		processType = new ProcessCPU(rules, nbCells, dimension, cellsPerDim);
+		break;
+	case CPUMulti:
+		processType = new ProcessCPUmulti(rules, nbCells, dimension, cellsPerDim);
+		break;
+	}
 	Game::cells = new uint8_t[nbCells];
 
 }
 
-
-
 void Game::initGrid() {
 	float r = 0;
-	float threshold = 0.3;
+	float threshold = 0.3f;
 	for (int i = 0; i < nbCells; i++) {
 		r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 
@@ -30,56 +44,16 @@ void Game::initGrid() {
 }
 
 Game::~Game() {
-	delete Game::rules;
 	delete Game::cells;
+	delete Game::processType;
 }
 
 void Game::step() {
-	process(cells, nbCells);
+	processType->process(cells);
 }
 
-void Game::process(uint8_t* cells, int nbCells) {
-	std::vector<int> cellsToChange;
-	std::vector<int> neighbours;
-	std::vector<int> deadCellsNeighbours;
-	int counter = 0;
-	int deadCellCounter = 0;
-	for (int i = 0; i < nbCells; ++i) {
-		if (cells[i] == 1) {
-			neighbours = getNeighbours(i);
 
-			for (int neighbour : neighbours) {
-				if (cells[neighbour] == 1) {
-					++counter;
-				}
-				else {
-					deadCellsNeighbours = getNeighbours(neighbour);
-					for (int deadCellNeighbour : deadCellsNeighbours) {
-						if (cells[deadCellNeighbour] == 1) {
-							++deadCellCounter;
-						}
-					}
-					if (deadCellCounter == 3) {
-						cellsToChange.push_back(neighbour);
-					}
-					deadCellCounter = 0;
-				}
-			}
-			if (counter != 2 && counter != 3) {
-				cellsToChange.push_back(i);
-			}
-			counter = 0;
-		}
-	}
-
-	int j = 0;
-	for (int i = 0; i < cellsToChange.size(); ++i) {
-		j = cellsToChange[i];
-		cells[j] = 1 - cells[j];
-	}
-}
-
-std::vector<int> Game::getNeighbours(int cell) {
+std::vector<int> Game::getNeighbours(int cell, int cellsPerDim) {
 
 	std::vector<int> neighbours(8);
 
