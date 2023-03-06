@@ -24,6 +24,7 @@ void GraphicsDisplay::initViewport()
 GraphicsDisplay::GraphicsDisplay(int width, int height, int dimension, int cellsPerDim) {
 	GraphicsDisplay::dimension = dimension;
 	GraphicsDisplay::cellsPerDim = cellsPerDim;
+	GraphicsDisplay::nbCells = pow(cellsPerDim, dimension);
 
 	GraphicsDisplay::windowManager = new WindowManager{ width, height, "2D Game of life" };
 

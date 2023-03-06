@@ -11,6 +11,7 @@ private:
 protected:
 	int dimension;
 	int cellsPerDim;
+	int nbCells;
 	virtual void draw(uint8_t*) = 0;
 	Shader* shaderManager;
 
