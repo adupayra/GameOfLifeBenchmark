@@ -21,7 +21,7 @@ public:
 	WindowManager* windowManager;
 
 	GraphicsDisplay(int, int, int, int);
-	void update(uint8_t*);
+	void render(uint8_t*);
 
 	~GraphicsDisplay();
 

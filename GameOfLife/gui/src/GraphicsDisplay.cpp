@@ -35,7 +35,7 @@ GraphicsDisplay::GraphicsDisplay(int width, int height, int dimension, int cells
 	GraphicsDisplay::shaderManager = NULL;
 }
 
-void GraphicsDisplay::update(uint8_t* cells)
+void GraphicsDisplay::render(uint8_t* cells)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	draw(cells);

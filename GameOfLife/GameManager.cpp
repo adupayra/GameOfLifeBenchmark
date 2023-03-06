@@ -24,6 +24,6 @@ GameManager::~GameManager() {
 void GameManager::run() {
 	while (!graphicsDisplay->windowManager->isClosedState()) {
 		gameInstance->step();
-		graphicsDisplay->update(gameInstance->cells);
+		graphicsDisplay->render(gameInstance->cells);
 	}
 }
