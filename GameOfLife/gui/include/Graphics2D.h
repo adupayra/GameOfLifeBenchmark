@@ -29,14 +29,14 @@ private:
 	void draw(uint8_t*);
 
 	float vertices[12] = {
-		-1.0f, 1.0f, 0.0f, 
-		-1.0f, -1.0f, 0.0f,
-		1.0f, 1.0f, 0.0f,
-		1.0f, -1.0f, 0.0f
+	-1.0f, 1.0f, 0.0f,
+	-1.0f, -1.0f, 0.0f,
+	1.0f, 1.0f, 0.0f,
+	1.0f, -1.0f, 0.0f
 	};
 
-	float indices[6] = {
-		0, 1, 2, 0, 2, 3
+	unsigned int indices[6] = {
+		0, 1, 3, 0, 3, 2
 	};
 
 	GLuint VBO;

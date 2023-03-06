@@ -38,10 +38,12 @@ GraphicsDisplay::GraphicsDisplay(int width, int height, int dimension, int cells
 void GraphicsDisplay::update(uint8_t* cells)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	draw(cells);	
+	draw(cells);
+
 	windowManager->update();
 	windowManager->processEvents();
 }
+
 
 GraphicsDisplay::~GraphicsDisplay()
 {

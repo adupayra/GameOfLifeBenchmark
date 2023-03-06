@@ -20,7 +20,6 @@ void Game::initGrid() {
 
 		if (r < threshold) {
 			cells[i] = 1;
-			cellsToChange.push_back(i);
 		}
 		else {
 			cells[i] = 0;
