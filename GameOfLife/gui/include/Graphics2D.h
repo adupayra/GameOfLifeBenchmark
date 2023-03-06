@@ -9,11 +9,12 @@ private:
 	const GLchar* vs =
 		"#version 460 core\n"
 		"layout(location = 0) in vec3 aPos;\n"
+		"layout(location = 1) in vec2 aTexCoord;\n"
 		"out vec2 texCoords;\n"
 		"void main()\n"
 		"{\n"
 		"	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-		"	texCoords = aPos.xy;\n"
+		"	texCoords = aTexCoord;\n"
 		"}\0";
 
 	const GLchar* fs =
@@ -28,16 +29,30 @@ private:
 
 	void draw(uint8_t*);
 
-	float vertices[12] = {
-	-1.0f, 1.0f, 0.0f,
-	-1.0f, -1.0f, 0.0f,
-	1.0f, 1.0f, 0.0f,
-	1.0f, -1.0f, 0.0f
+	/*float vertices[20] = {
+		-1.0f, 1.0f, 0.0f,	0.0f, 1.0f,
+		-1.0f, -1.0f, 0.0f,	0.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,	1.0f, 1.0f,
+		1.0f, -1.0f, 0.0f,	1.0f, 0.0f
+	};*/
+
+	float vertices[20] = {
+		// positions          // colors           // texture coords
+		 1.0f,  1.0f, 0.0f,   1.0f, 1.0f,   // top right
+		 1.0f, -1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+		-1.0f, -1.0f, 0.0f,    0.0f, 0.0f,   // bottom left
+		-1.0f,  1.0f, 0.0f,   0.0f, 1.0f    // top left 
 	};
 
+	//unsigned int indices[6] = {
+	//	0, 1, 3, 0, 3, 2
+	//};
+
 	unsigned int indices[6] = {
-		0, 1, 3, 0, 3, 2
+	0, 1, 2, 0, 2, 3
 	};
+
+
 
 	GLuint VBO;
 	GLuint VAO;

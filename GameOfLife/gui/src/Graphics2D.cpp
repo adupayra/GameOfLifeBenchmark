@@ -22,8 +22,10 @@ Graphics2D::Graphics2D(int width, int height, int dimension, int cellsPerDim) : 
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), NULL);
-	glEnableVertexArrayAttrib(VAO, 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, NULL, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, NULL, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
 
 	glGenBuffers(1, &EBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -31,6 +33,8 @@ Graphics2D::Graphics2D(int width, int height, int dimension, int cellsPerDim) : 
 
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 
 
@@ -39,41 +43,17 @@ Graphics2D::Graphics2D(int width, int height, int dimension, int cellsPerDim) : 
 void Graphics2D::generateTexture(uint8_t* cells)
 {
 	uint8_t value = 0;
-	//int j = 0;
-	//for (int i = 0; i < nbCells; ++i) {
-	//	//value = cells[i] * 255;
-	//	//textureData[j] = value;
-	//	//textureData[j + 1] = value;
-	//	//textureData[j + 2] = value;
+	int j = 0;
+	for (int i = 0; i < nbCells; ++i) {
+		value = cells[i] * 255;
+		textureData[j] = value;
+		textureData[j + 1] = value;
+		textureData[j + 2] = value;
+		j += 3;
 
-	//	if (j < nbCells * 3 / 2)
-	//	{
-	//		textureData[j] = 0;
-	//		textureData[j + 1] = 0;
-	//		textureData[j + 2] = 0;
-	//	}
-	//	else {
-	//		textureData[j] = 255;
-	//		textureData[j + 1] = 255;
-	//		textureData[j + 2] = 255;
-	//	}
-	//	j += 3;
-
-	//}
-
-	for (int i = 0; i < nbCells * 3; i += 3) {
-		if (i < nbCells * 3 / 2)
-		{
-			textureData[i] = 0;
-			textureData[i + 1] = 0;
-			textureData[i + 2] = 0;
-		}
-		else {
-			textureData[i] = 255;
-			textureData[i + 1] = 255;
-			textureData[i + 2] = 255;
-		}
 	}
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,  cellsPerDim, cellsPerDim, 0, GL_RGB, GL_UNSIGNED_INT, textureData);
+
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,  cellsPerDim, cellsPerDim, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData);
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
