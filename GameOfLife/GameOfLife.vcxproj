@@ -21,26 +21,26 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="gui\include\GameView.h" />
+    <ClInclude Include="gui\include\Graphics2D.h" />
     <ClInclude Include="rules\include\LifeRules.h" />
     <ClInclude Include="rules\include\ProcessEnum.h" />
     <ClInclude Include="gui\include\WindowManager.h" />
-    <ClInclude Include="gui\include\GraphicDisplay.h" />
-    <ClInclude Include="gui\include\TextDisplay.h" />
+    <ClInclude Include="gui\include\GraphicsDisplay.h" />
     <ClInclude Include="rules\include\ClassicRules.h" />
+    <ClInclude Include="gui\include\Shader.h" />
     <ClInclude Include="thirdparty\include\glad\glad.h" />
     <ClInclude Include="thirdarty\include\glfw3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="gui\src\GameView.cpp" />
+    <ClCompile Include="gui\src\Graphics2D.cpp" />
     <ClCompile Include="rules\src\LifeRules.cpp" />
     <ClCompile Include="run.cpp" />
     <ClCompile Include="gui\src\WindowManager.cpp" />
-    <ClCompile Include="gui\src\GraphicDisplay.cpp" />
-    <ClCompile Include="gui\src\TextDisplay.cpp" />
+    <ClCompile Include="gui\src\GraphicsDisplay.cpp" />
     <ClCompile Include="rules\src\ClassicRules.cpp" />
+    <ClCompile Include="gui\src\Shader.cpp" />
     <ClCompile Include="thirdparty\src\glad.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -96,7 +96,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Program Files (x86)\OpenGLTP\include;C:\Users\antoi\source\repos\GameOfLife\GameOfLife\thirdparty\include;C:\Users\antoi\source\repos\GameOfLife\GameOfLife\gui\include;C:\Users\antoi\source\repos\GameOfLife\GameOfLife\rules\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\antoi\source\repos\GameOfLife\GameOfLife\thirdparty\include;C:\Users\antoi\source\repos\GameOfLife\GameOfLife\gui\include;C:\Users\antoi\source\repos\GameOfLife\GameOfLife\rules\include</IncludePath>
     <PublicIncludeDirectories>
     </PublicIncludeDirectories>
   </PropertyGroup>
