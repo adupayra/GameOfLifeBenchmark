@@ -58,9 +58,6 @@ uint8_t* ProcessCPU::process(uint8_t* cells) {
 		nbNeighbours = 0;
 	}
 
-	uint8_t* temp = cells;
-	cells = newCells;
-	newCells = temp;
-	std::cout << (cells == newCells) << std::endl;
+	std::swap(cells, newCells);
 	return cells;
 }

@@ -20,9 +20,9 @@ Game::Game(int dimension, int cellsPerDim, ProcessMode processMode) {
 	case CPU:
 		processType = new ProcessCPU(rules, nbCells, dimension, cellsPerDim);
 		break;
-	//case CPUMulti:
-	//	processType = new ProcessCPUmulti(rules, nbCells, dimension, cellsPerDim);
-	//	break;
+	case CPUMulti:
+		processType = new ProcessCPUmulti(rules, nbCells, dimension, cellsPerDim);
+		break;
 	}
 	Game::cells = new uint8_t[nbCells];
 
