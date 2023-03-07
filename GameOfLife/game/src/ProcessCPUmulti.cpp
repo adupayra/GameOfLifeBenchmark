@@ -1,5 +1,5 @@
 #include "ProcessCPUmulti.h"
 
-void ProcessCPUmulti::process(uint8_t* cells)
-{
-}
+//uint8_t ProcessCPUmulti::process(uint8_t* cells)
+//{
+//}

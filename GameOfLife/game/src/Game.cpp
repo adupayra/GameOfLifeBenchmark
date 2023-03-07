@@ -20,9 +20,9 @@ Game::Game(int dimension, int cellsPerDim, ProcessMode processMode) {
 	case CPU:
 		processType = new ProcessCPU(rules, nbCells, dimension, cellsPerDim);
 		break;
-	case CPUMulti:
-		processType = new ProcessCPUmulti(rules, nbCells, dimension, cellsPerDim);
-		break;
+	//case CPUMulti:
+	//	processType = new ProcessCPUmulti(rules, nbCells, dimension, cellsPerDim);
+	//	break;
 	}
 	Game::cells = new uint8_t[nbCells];
 
@@ -49,7 +49,8 @@ Game::~Game() {
 }
 
 void Game::step() {
-	processType->process(cells);
+	cells = processType->process(cells);
+
 }
 
 
@@ -78,3 +79,4 @@ std::vector<int> Game::getNeighbours(int cell, int cellsPerDim) {
 
 	return neighbours;
 }
+ 

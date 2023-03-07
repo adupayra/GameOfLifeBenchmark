@@ -1,5 +1,5 @@
 #include "ProcessGPU.h"
 
-void ProcessGPU::process(uint8_t* cells)
-{
-}
+//void ProcessGPU::process(uint8_t* cells)
+//{
+//}

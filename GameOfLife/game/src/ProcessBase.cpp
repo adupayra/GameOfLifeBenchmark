@@ -6,6 +6,7 @@ ProcessBase::ProcessBase(LifeRules* rules, int nbCells, int dimension, int cells
 	ProcessBase::dimension = dimension;
 	ProcessBase::nbCells = nbCells;
 	ProcessBase::rules = rules;
+	ProcessBase::newCells = new uint8_t[nbCells];
 }
 
 ProcessBase::~ProcessBase()

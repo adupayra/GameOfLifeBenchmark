@@ -7,6 +7,6 @@ class ProcessCPU: public ProcessBase
 public:
 	ProcessCPU(LifeRules* rules, int nbCells, int dimension, int cellsPerDim) : ProcessBase(rules, nbCells, dimension, cellsPerDim) {}
 
-	void process(uint8_t* cells);
+	uint8_t* process(uint8_t* cells);
 };
 
