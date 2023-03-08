@@ -4,6 +4,7 @@ GameCPUThreadP::GameCPUThreadP(int dimension, int cellsPerDim): GameCPUThreads(d
 {
 
 	m_threadPool = new ThreadPool(m_nThreads);
+	m_threadPool2 = new ThreadPool2(m_nThreads, &GameCPUThreads::processCells, this);
 }
 
 
@@ -13,9 +14,11 @@ void GameCPUThreadP::process()
 	int i = 0;
 	for (i = 0; i < m_nThreads - 1; i++) {
 		int index = i * m_cellsPerThread;
-		results.emplace_back(m_threadPool->enqueue(&GameCPUThreadP::processCells, this, index, index + m_cellsPerThread));
+		//results.emplace_back(m_threadPool->enqueue(&GameCPUThreadP::processCells, this, index, index + m_cellsPerThread));
+		results.emplace_back(m_threadPool2->wakeThread(index, index + m_cellsPerThread));
 	}
-	results.emplace_back(m_threadPool->enqueue(&GameCPUThreadP::processCells, this, i * m_cellsPerThread, m_nbCells - 1));
+	//results.emplace_back(m_threadPool->enqueue(&GameCPUThreadP::processCells, this, i * m_cellsPerThread, m_nbCells - 1));
+	results.emplace_back(m_threadPool2->wakeThread(i * m_cellsPerThread, m_nbCells - 1));
 
 
 	for (std::future<void>& f : results) {

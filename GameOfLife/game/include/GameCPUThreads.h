@@ -11,8 +11,8 @@ private:
 protected:
     int m_nThreads;
     int m_cellsPerThread;
-    void processCells(int, int);
 public:
+    void processCells(int, int);
     GameCPUThreads(int dimension, int cellsPerDim);
 };
 
