@@ -71,7 +71,7 @@ void GameManager::run() {
 
 		duration<double, std::milli> ms_double = t2 - t1;
 		std::cout << "Cells update time: " << ms_double.count() << "ms\n";
-		system("CLS");
+		//system("CLS");
 
 		m_graphicsDisplay->render(m_gameInstance->getCells());
 		i++;
