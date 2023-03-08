@@ -1,26 +1,30 @@
 #pragma once
 #include "LifeRules.h"
-#include "ProcessBase.h"
 #include <vector>
 
 class Game
 {
-private:
-	int dimension;
-	int nbCells;
-	int cellsPerDim;
-	std::vector<int> cellsToChange;
-	ProcessBase *processType;
-	uint8_t* cells;
+protected:
+	int m_dimension;
+	int m_nbCells;
+	int m_cellsPerDim;
+	//ProcessBase *m_processType;
+	LifeRules* m_rules;
+	uint8_t* m_cells;
+	uint8_t* m_newCells;
 
+	int getAliveNeighbours(int cell);
+
+	virtual void process() = 0;
 
 public:
 	
-	const uint8_t* getCells() { return cells; }
+	const uint8_t* getCells() { return m_cells; }
 
-	Game(int, int, ProcessMode);
+	Game(int, int);
 
-	static std::vector<int> getNeighbours(int cell, int cellsPerDim);
+	static std::vector<int> getNeighboursIndices(int cell, int cellsPerDim);
+
 
 	void initGrid();
 

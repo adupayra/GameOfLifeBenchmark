@@ -3,6 +3,9 @@
 enum ProcessMode
 {
 	CPU,
-	CPUMulti,
+	CPUAlt,
+	CPUThreads,
+	CPUppl,
+	CPUThreadP,
 	GPU
 };
