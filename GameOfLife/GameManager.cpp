@@ -7,6 +7,7 @@
 #include <GameCPUThreads.h>
 #include <GameCPUppl.h>
 #include <GameCPUAlt.h>
+#include <GameCPUThreadP.h>
 
 GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode) {
 
@@ -33,7 +34,11 @@ GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode
 	case CPUppl:
 		GameManager::m_gameInstance = new GameCPUppl(dimension, cellsPerDim);
 		break;
+	case CPUThreadP:
+		GameManager::m_gameInstance = new GameCPUThreadP(dimension, cellsPerDim);
+		break;
 	default:
+		std::cerr << "Requested process mode wasn't found, loading CPU" << std::endl;
 		GameManager::m_gameInstance = new GameCPU(dimension, cellsPerDim);
 	}
 
