@@ -8,7 +8,7 @@ protected:
 	int m_dimension;
 	int m_nbCells;
 	int m_cellsPerDim;
-	//ProcessBase *m_processType;
+
 	LifeRules* m_rules;
 	uint8_t* m_cells;
 	uint8_t* m_newCells;

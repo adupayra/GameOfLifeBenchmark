@@ -3,9 +3,6 @@
 #include <cmath>
 #include <iostream>
 #include "ClassicRules2D.h"
-#include "ProcessCPU.h"
-#include "ProcessCPUmulti.h"
-#include "ProcessGPU.h"
 
 
 int Game::getAliveNeighbours(int i)
@@ -38,18 +35,10 @@ Game::Game(int dimension, int cellsPerDim) {
 	Game::m_cellsPerDim = cellsPerDim;
 	Game::m_nbCells = pow(cellsPerDim, dimension);
 	m_rules = NULL;
-	//Game::m_processType = NULL;
 
 	if(dimension == 2)
 		m_rules = new ClassicRules2D();
-	//switch (processMode) {
-	//case CPU:
-	//	m_processType = new ProcessCPU(rules, m_nbCells, dimension, cellsPerDim);
-	//	break;
-	//case CPUMulti:
-	//	m_processType = new ProcessCPUmulti(rules, m_nbCells, dimension, cellsPerDim);
-	//	break;
-	//}
+
 	Game::m_cells = new uint8_t[m_nbCells];
 	Game::m_newCells = new uint8_t[m_nbCells];
 
@@ -74,11 +63,9 @@ Game::~Game() {
 	delete Game::m_cells;
 	delete Game::m_newCells;
 	delete Game::m_rules;
-	//delete Game::m_processType;
 }
 
 void Game::step() {
-	//cells = processType->process(cells);
 	process();
 
 }

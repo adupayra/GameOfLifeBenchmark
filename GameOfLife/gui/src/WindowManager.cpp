@@ -11,21 +11,21 @@ void WindowManager::loadGlad()
 
 WindowManager::WindowManager(int width, int height, const char* title)
 {
-	WindowManager::width = width;
-	WindowManager::height = height;
+	WindowManager::m_width = width;
+	WindowManager::m_height = height;
 
 	glfwSetErrorCallback(glfwErrorCallback);
 	if (!glfwInit())
 		exit(EXIT_FAILURE);
 
-	WindowManager::wind = glfwCreateWindow(width, height, title, NULL, NULL);
+	WindowManager::m_wind = glfwCreateWindow(width, height, title, NULL, NULL);
 
-	if (!wind)
+	if (!m_wind)
 		exit(EXIT_FAILURE);
-	glfwSetKeyCallback(wind, glfwKeyCallback);
-	glfwSetFramebufferSizeCallback(wind, glfwFrameBuffersizeCallback);
+	glfwSetKeyCallback(m_wind, glfwKeyCallback);
+	glfwSetFramebufferSizeCallback(m_wind, glfwFrameBuffersizeCallback);
 
-	glfwMakeContextCurrent(wind);
+	glfwMakeContextCurrent(m_wind);
 
 	loadGlad();
 	
@@ -33,7 +33,7 @@ WindowManager::WindowManager(int width, int height, const char* title)
 
 WindowManager::~WindowManager()
 {
-	glfwDestroyWindow(wind);
+	glfwDestroyWindow(m_wind);
 	glfwTerminate();
 }
 
@@ -53,7 +53,7 @@ void WindowManager::glfwFrameBuffersizeCallback(GLFWwindow* wind, int width, int
 
 void WindowManager::update()
 {
-	glfwSwapBuffers(wind);
+	glfwSwapBuffers(m_wind);
 }
 
 void WindowManager::processEvents()
@@ -63,11 +63,11 @@ void WindowManager::processEvents()
 
 void WindowManager::show()
 {
-	glfwShowWindow(wind);
+	glfwShowWindow(m_wind);
 }
 
 bool WindowManager::isClosedState()
 {
-	return glfwWindowShouldClose(wind);
+	return glfwWindowShouldClose(m_wind);
 }
 

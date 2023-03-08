@@ -4,7 +4,7 @@
 class Shader
 {	
 private:
-	GLuint id;
+	GLuint m_id;
 
 public:
 	Shader(const GLchar*, const GLchar*);

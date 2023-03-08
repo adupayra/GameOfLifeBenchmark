@@ -6,7 +6,7 @@ class Graphics2D: public GraphicsDisplay
 public:
 	Graphics2D(int width, int height, int dimension, int cellsPerDim);
 private:
-	const GLchar* vs =
+	const GLchar* m_vs =
 		"#version 460 core\n"
 		"layout(location = 0) in vec3 aPos;\n"
 		"layout(location = 1) in vec2 aTexCoord;\n"
@@ -17,7 +17,7 @@ private:
 		"	texCoords = aTexCoord;\n"
 		"}\0";
 
-	const GLchar* fs =
+	const GLchar* m_fs =
 		"#version 460 core\n"
 		"out vec4 FragColor;\n"
 		"in vec2 texCoords;\n"
@@ -30,7 +30,7 @@ private:
 	void draw(const uint8_t*);
 
 
-	float vertices[20] = {
+	float m_vertices[20] = {
 		 1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 
 		 1.0f, -1.0f, 0.0f,   1.0f, 0.0f, 
 		-1.0f, -1.0f, 0.0f,    0.0f, 0.0f,  
@@ -38,18 +38,18 @@ private:
 	};
 
 
-	unsigned int indices[6] = {
+	unsigned int m_indices[6] = {
 	0, 1, 2, 0, 2, 3
 	};
 
 
 
-	GLuint VBO;
-	GLuint VAO;
-	GLuint EBO;
-	GLuint textureID;	
+	GLuint m_VBO;
+	GLuint m_VAO;
+	GLuint m_EBO;
+	GLuint m_textureID;	
 	
-	uint8_t* textureData;
+	uint8_t* m_textureData;
 	void generateTexture(const uint8_t* cells);
 
 

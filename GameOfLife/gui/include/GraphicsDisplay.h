@@ -9,16 +9,16 @@ private:
 	void initViewport();
 
 protected:
-	int dimension;
-	int cellsPerDim;
-	int nbCells;
+	int m_dimension;
+	int m_cellsPerDim;
+	int m_nbCells;
 	virtual void draw(const uint8_t*) = 0;
-	Shader* shaderManager;
+	Shader* m_shaderManager;
 
 
 public:
 
-	WindowManager* windowManager;
+	WindowManager* m_windowManager;
 
 	GraphicsDisplay(int, int, int, int);
 	void render(const uint8_t*);

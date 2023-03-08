@@ -5,9 +5,9 @@
 class WindowManager
 {
 private:
-	GLFWwindow* wind;
-	int width;
-	int height;
+	GLFWwindow* m_wind;
+	int m_width;
+	int m_height;
 
 	void loadGlad();
 public:
@@ -17,11 +17,11 @@ public:
 
 	~WindowManager();
 
-	GLFWwindow* getWindow() { return wind; }
+	GLFWwindow* getWindow() { return m_wind; }
 
-	int getWidth() { return width; }
+	int getWidth() { return m_width; }
 
-	int getHeight() { return height; }
+	int getHeight() { return m_height; }
 
 	static void glfwErrorCallback(int, const char*);
 

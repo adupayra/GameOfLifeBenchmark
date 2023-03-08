@@ -12,16 +12,16 @@ Shader::Shader(const GLchar* vsSource, const GLchar* fsSource)
 	glShaderSource(fsId, 1, &fsSource, NULL);
 	glCompileShader(fsId);
 
-	id = glCreateProgram();
-	glAttachShader(id, vsId);
-	glAttachShader(id, fsId);
+	m_id = glCreateProgram();
+	glAttachShader(m_id, vsId);
+	glAttachShader(m_id, fsId);
 
 	glDeleteShader(vsId);
 	glDeleteShader(fsId);
 
-	glLinkProgram(id);
+	glLinkProgram(m_id);
 }
 
 void Shader::use() {
-	glUseProgram(id);
+	glUseProgram(m_id);
 }

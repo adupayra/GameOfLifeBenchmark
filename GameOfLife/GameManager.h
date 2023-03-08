@@ -6,9 +6,9 @@
 class GameManager
 {
 private:
-	GraphicsDisplay* graphicsDisplay;
+	GraphicsDisplay* m_graphicsDisplay;
 
-	Game* gameInstance;
+	Game* m_gameInstance;
 
 public:
 	GameManager(int, int, ProcessMode);

@@ -16,23 +16,23 @@ void GLAPIENTRY GraphicsDisplay::openglMessageCallback(GLenum source,
 
 void GraphicsDisplay::initViewport()
 {
-	glViewport(0, 0, windowManager->getWidth(), windowManager->getHeight());
-	windowManager->show();
+	glViewport(0, 0, m_windowManager->getWidth(), m_windowManager->getHeight());
+	m_windowManager->show();
 	glClearColor(0.5, 0.5, 0.5, 1.0);
 }
 
 GraphicsDisplay::GraphicsDisplay(int width, int height, int dimension, int cellsPerDim) {
-	GraphicsDisplay::dimension = dimension;
-	GraphicsDisplay::cellsPerDim = cellsPerDim;
-	GraphicsDisplay::nbCells = pow(cellsPerDim, dimension);
+	GraphicsDisplay::m_dimension = dimension;
+	GraphicsDisplay::m_cellsPerDim = cellsPerDim;
+	GraphicsDisplay::m_nbCells = pow(cellsPerDim, dimension);
 
-	GraphicsDisplay::windowManager = new WindowManager{ width, height, "2D Game of life" };
+	GraphicsDisplay::m_windowManager = new WindowManager{ width, height, "2D Game of life" };
 
 	glEnable(GL_DEBUG_OUTPUT);
 	glDebugMessageCallback(openglMessageCallback, 0);
 
 	initViewport();
-	GraphicsDisplay::shaderManager = NULL;
+	GraphicsDisplay::m_shaderManager = NULL;
 }
 
 void GraphicsDisplay::render(const uint8_t* cells)
@@ -40,15 +40,15 @@ void GraphicsDisplay::render(const uint8_t* cells)
 	glClear(GL_COLOR_BUFFER_BIT);
 	draw(cells);
 
-	windowManager->update();
-	windowManager->processEvents();
+	m_windowManager->update();
+	m_windowManager->processEvents();
 }
 
 
 GraphicsDisplay::~GraphicsDisplay()
 {
-	delete windowManager;
-	if(shaderManager != NULL)
-		delete shaderManager;
+	delete m_windowManager;
+	if(m_shaderManager != NULL)
+		delete m_shaderManager;
 }
 
