@@ -1,9 +1,8 @@
 #include "GameCPUThreadP.h"
 
-GameCPUThreadP::GameCPUThreadP(int dimension, int cellsPerDim): Game(dimension, cellsPerDim)
+GameCPUThreadP::GameCPUThreadP(int dimension, int cellsPerDim): GameCPUThreads(dimension, cellsPerDim)
 {
-	m_nThreads = std::thread::hardware_concurrency();
-	m_cellsPerThread = m_nbCells / m_nThreads;
+
 	m_threadPool = new ThreadPool(m_nThreads);
 }
 
@@ -24,13 +23,4 @@ void GameCPUThreadP::process()
 	}
 
 	std::swap(m_cells, m_newCells);
-}
-
-void GameCPUThreadP::processCells(int start, int end)
-{
-	int nbNeighbours = 0;
-	for (int i = start; i < end; i++) {
-		nbNeighbours = getAliveNeighbours(i);
-		m_newCells[i] = m_rules->isAlive(m_cells[i], nbNeighbours);
-	}
 }

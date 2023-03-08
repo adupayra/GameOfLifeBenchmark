@@ -7,10 +7,11 @@ class GameCPUThreads :
 {
 private:
     void process();
+
+protected:
     int m_nThreads;
     int m_cellsPerThread;
     void processCells(int, int);
-
 public:
     GameCPUThreads(int dimension, int cellsPerDim);
 };

@@ -1,15 +1,12 @@
 #pragma once
-#include "Game.h"
+#include "GameCPUThreads.h"
 #include "ThreadPool.h"
 
 class GameCPUThreadP :
-    public Game
+    public GameCPUThreads
 {
 private:
     ThreadPool* m_threadPool;
-    int m_cellsPerThread;
-    int m_nThreads;
-    void processCells(int start, int end);
     void process();
 
 public:
