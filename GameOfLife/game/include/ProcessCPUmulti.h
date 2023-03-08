@@ -1,6 +1,7 @@
 #pragma once
 #include "ProcessBase.h"
 #include <stdint.h>
+#include <thread>
 
 class ProcessCPUmulti: public ProcessBase
 {
@@ -9,8 +10,9 @@ private:
 	unsigned int cellsPerThread;
 	void processCells(uint8_t* cells, int start, int end);
 	//uint8_t* currentCells;
+	void processCell(int);
+	std::vector<std::thread> threadPool;
 
-	void test(int);
 public:
 	ProcessCPUmulti(LifeRules* rules, int nbCells, int dimension, int cellsPerDim);
 

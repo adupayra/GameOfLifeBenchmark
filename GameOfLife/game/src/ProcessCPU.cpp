@@ -45,18 +45,57 @@
 //	return cells;
 //}
 
+//
+//uint8_t* ProcessCPU::process(uint8_t* cells) {
+//	std::vector<int> nearestNeighbours;
+//	int nbNeighbours = 0;
+//	for (int i = 0; i < nbCells; ++i) {
+//		nearestNeighbours = Game::getNeighbours(i, cellsPerDim);
+//		for (int j = 0; j < nearestNeighbours.size(); ++j) {
+//			nbNeighbours += cells[nearestNeighbours[j]];
+//		}
+//		newCells[i] = rules->isAlive(cells[i], nbNeighbours);
+//		nbNeighbours = 0;
+//	}
+//
+//	std::swap(cells, newCells);
+//	return cells;
+//}
 
-uint8_t* ProcessCPU::process(uint8_t* cells) {
-	std::vector<int> nearestNeighbours;
-	int nbNeighbours = 0;
+uint8_t* ProcessCPU::process(uint8_t* cells)
+{
+
+
 	for (int i = 0; i < nbCells; ++i) {
-		nearestNeighbours = Game::getNeighbours(i, cellsPerDim);
-		for (int j = 0; j < nearestNeighbours.size(); ++j) {
-			nbNeighbours += cells[nearestNeighbours[j]];
-		}
+		//std::vector<int> nearestNeighbours;
+		//std::vector<int> neighbours(8);
+		int nbNeighbours = 0;
+
+		//std::vector<int> neighbours(8);
+
+		int colNb = i % cellsPerDim;
+		int rowNb = i / cellsPerDim;
+		int newCell = i + 1;
+
+		int x0 = (rowNb - 1 + cellsPerDim) % cellsPerDim;
+		int x2 = (rowNb + 1) % cellsPerDim;
+		int y0 = (colNb - 1 + cellsPerDim) % cellsPerDim;
+		int y2 = (colNb + 1) % cellsPerDim;
+
+		nbNeighbours += cells[x0 * cellsPerDim + y0];
+		nbNeighbours += cells[x0 * cellsPerDim + colNb];
+		nbNeighbours += cells[x0 * cellsPerDim + y2];
+		nbNeighbours += cells[rowNb * cellsPerDim + y0];
+		nbNeighbours += cells[rowNb * cellsPerDim + y2];
+		nbNeighbours += cells[x2 * cellsPerDim + y0];
+		nbNeighbours += cells[x2 * cellsPerDim + colNb];
+		nbNeighbours += cells[x2 * cellsPerDim + y2];
+
+
 		newCells[i] = rules->isAlive(cells[i], nbNeighbours);
 		nbNeighbours = 0;
 	}
+
 
 	std::swap(cells, newCells);
 	return cells;
