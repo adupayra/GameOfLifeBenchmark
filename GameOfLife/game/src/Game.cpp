@@ -42,6 +42,7 @@ Game::Game(int dimension, int cellsPerDim) {
 	Game::m_cells = new uint8_t[m_nbCells];
 	Game::m_newCells = new uint8_t[m_nbCells];
 
+	initGrid();
 }
 
 void Game::initGrid() {

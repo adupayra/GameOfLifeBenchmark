@@ -13,12 +13,13 @@ protected:
 	uint8_t* m_cells;
 	uint8_t* m_newCells;
 
-	int getAliveNeighbours(int cell);
 
 	virtual void process() = 0;
 
 public:
+	int getAliveNeighbours(int cell);
 	
+	LifeRules* getRules() { return m_rules; }
 	const uint8_t* getCells() { return m_cells; }
 
 	Game(int, int);

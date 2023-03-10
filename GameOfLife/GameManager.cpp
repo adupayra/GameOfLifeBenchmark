@@ -8,6 +8,7 @@
 #include <GameCPUppl.h>
 #include <GameCPUAlt.h>
 #include <GameCPUThreadP.h>
+#include <GameGPU.h>
 
 GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode) {
 
@@ -37,6 +38,9 @@ GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode
 	case CPUThreadP:
 		GameManager::m_gameInstance = new GameCPUThreadP(dimension, cellsPerDim);
 		break;
+	case GPU:
+		GameManager::m_gameInstance = new GameGPU(dimension, cellsPerDim);
+		break;
 	default:
 		std::cerr << "Requested process mode wasn't found, loading CPU" << std::endl;
 		GameManager::m_gameInstance = new GameCPU(dimension, cellsPerDim);
@@ -44,8 +48,6 @@ GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode
 
 	if(dimension == 2)
 		GameManager::m_graphicsDisplay = new Graphics2D(600, 512, dimension, cellsPerDim);
-
-	m_gameInstance->initGrid();
 
 	run();
 }
