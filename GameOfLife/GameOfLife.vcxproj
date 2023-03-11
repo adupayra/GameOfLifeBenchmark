@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Benchmark.h" />
     <ClInclude Include="game\include\GameGPU.h" />
     <ClInclude Include="game\include\GameCPUThreadP.h" />
     <ClInclude Include="game\include\GameCPUAlt.h" />
@@ -40,6 +41,7 @@
     <ClInclude Include="game\include\ThreadPool.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Benchmark.cpp" />
     <ClCompile Include="game\src\GameGPU.cpp" />
     <ClCompile Include="game\src\GameCPUThreadP.cpp" />
     <ClCompile Include="game\src\GameCPUAlt.cpp" />

@@ -10,12 +10,14 @@
 #include <GameCPUThreadP.h>
 #include <GameGPU.h>
 
-GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode) {
+GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode, bool benchmarking, int gpuThreads, double timeout, int iterations) {
 
 	if (dimension != 3 && dimension != 2) {
 		throw "Dimensions different than 2 and 3 are not handled";
 	}
 
+	m_isBenchmarking = benchmarking;
+	m_meanTime = 0;
 	switch (processMode)
 	{
 	case CPU:
@@ -46,10 +48,15 @@ GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode
 		GameManager::m_gameInstance = new GameCPU(dimension, cellsPerDim);
 	}
 
-	if(dimension == 2)
-		GameManager::m_graphicsDisplay = new Graphics2D(600, 512, dimension, cellsPerDim);
+	if (!benchmarking) {
+		if (dimension == 2)
+			GameManager::m_graphicsDisplay = new Graphics2D(600, 512, dimension, cellsPerDim);
+	}
 
-	run();
+	if (benchmarking)
+		runBench(iterations, timeout);
+	else
+		run();
 }
 
 GameManager::~GameManager() {
@@ -73,9 +80,39 @@ void GameManager::run() {
 
 		duration<double, std::milli> ms_double = t2 - t1;
 		std::cout << "Cells update time: " << ms_double.count() << "ms\n";
-		//system("CLS");
 
 		m_graphicsDisplay->render(m_gameInstance->getCells());
 		i++;
 	}
+}
+
+void GameManager::runBench(int iterations, double timeout) {
+	using std::chrono::high_resolution_clock;
+	using std::chrono::duration_cast;
+	using std::chrono::duration;
+	using std::chrono::milliseconds;
+	
+	bool isTimedout = false;
+	std::vector<double> times;
+	int i = 0;
+	while (!isTimedout && i < iterations) {
+		//std::cout << "Iteration " << i << std::endl;
+
+		auto t1 = high_resolution_clock::now();
+		m_gameInstance->step();
+		auto t2 = high_resolution_clock::now();
+
+		duration<double, std::milli> ms_double = t2 - t1;
+		if (ms_double.count() > timeout)
+			isTimedout = true;
+		//std::cout << "Cells update time: " << ms_double.count() << "ms\n";
+		times.push_back(ms_double.count());
+		i++;
+	}
+
+	double sum = 0;
+	for (int j = 0; j < times.size(); ++j) {
+		sum += times[j];
+	}
+	m_meanTime = sum / times.size();
 }
