@@ -53,40 +53,44 @@ GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode
 			GameManager::m_graphicsDisplay = new Graphics2D(600, 512, dimension, cellsPerDim);
 	}
 
-	if (benchmarking)
-		runBench(iterations, timeout);
-	else
-		run();
+	m_processData = new ProcessData(processMode);
+
+	//if (benchmarking)
+	//	runBench(iterations, timeout);
+	//else
+	//	run();
 }
 
 GameManager::~GameManager() {
 	delete m_gameInstance;
 	delete m_graphicsDisplay;
+	delete m_processData;
 }
 
 void GameManager::run() {
-	using std::chrono::high_resolution_clock;
-	using std::chrono::duration_cast;
-	using std::chrono::duration;
-	using std::chrono::milliseconds;
+	//using std::chrono::high_resolution_clock;
+	//using std::chrono::duration_cast;
+	//using std::chrono::duration;
+	//using std::chrono::milliseconds;
 
 	int i = 1;
 	while (!m_graphicsDisplay->m_windowManager->isClosedState()) {
+
 		std::cout << "Iteration " << i << std::endl;
 
-		auto t1 = high_resolution_clock::now();
-		m_gameInstance->step();
-		auto t2 = high_resolution_clock::now();
 
-		duration<double, std::milli> ms_double = t2 - t1;
-		std::cout << "Cells update time: " << ms_double.count() << "ms\n";
+		m_processData->startMeasurements();
+		m_gameInstance->step();
+		m_processData->endMeasurements();
+		std::cout << "CPU Usage: " << m_processData->getCpuUsage() << std::endl;
+		std::cout << "Cells update time: " << m_processData->getExecTime() << "ms\n";
 
 		m_graphicsDisplay->render(m_gameInstance->getCells());
 		i++;
 	}
 }
 
-void GameManager::runBench(int iterations, double timeout) {
+bool GameManager::runBench(int iterations, double timeout) {
 	using std::chrono::high_resolution_clock;
 	using std::chrono::duration_cast;
 	using std::chrono::duration;
@@ -114,5 +118,7 @@ void GameManager::runBench(int iterations, double timeout) {
 	for (int j = 0; j < times.size(); ++j) {
 		sum += times[j];
 	}
+	//m_processData.m_meanTime = sum / times.size();
 	m_meanTime = sum / times.size();
+	return isTimedout;
 }

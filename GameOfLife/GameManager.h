@@ -2,6 +2,7 @@
 
 #include "GraphicsDisplay.h"
 #include "Game.h"
+#include "ProcessData.h"
 
 class GameManager
 {
@@ -14,14 +15,18 @@ private:
 
 	double m_meanTime;
 
+	ProcessData* m_processData;
+
 public:
 	GameManager(int, int, ProcessMode, bool benchmarking = false, int gpuThreads = 256, double timeout = 500, int iterations = 500);
+
+	const ProcessData* getProcessData() { return m_processData; }
 
 	double getMeantime() { return m_meanTime;}
 
 	void run();
 
-	void runBench(int, double);
+	bool runBench(int, double);
 	
 	~GameManager();
 };

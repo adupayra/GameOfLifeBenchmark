@@ -36,6 +36,7 @@
     <ClInclude Include="gui\include\GraphicsDisplay.h" />
     <ClInclude Include="game\include\ClassicRules2D.h" />
     <ClInclude Include="gui\include\Shader.h" />
+    <ClInclude Include="ProcessData.h" />
     <ClInclude Include="thirdparty\include\glad\glad.h" />
     <ClInclude Include="thirdarty\include\glfw3.h" />
     <ClInclude Include="game\include\ThreadPool.h" />
@@ -51,6 +52,7 @@
     <ClCompile Include="game\src\Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="gui\src\Graphics2D.cpp" />
+    <ClCompile Include="ProcessData.cpp" />
     <ClCompile Include="run.cpp" />
     <ClCompile Include="gui\src\WindowManager.cpp" />
     <ClCompile Include="gui\src\GraphicsDisplay.cpp" />
