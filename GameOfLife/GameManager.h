@@ -16,7 +16,7 @@ private:
 	ProcessData* m_processData;
 
 public:
-	GameManager(int, int, ProcessMode, bool benchmarking = false, int gpuThreads = 256, double timeout = 500, int iterations = 500);
+	GameManager(int, int, ProcessMode, bool benchmarking = false, int gpuThreads = 256, double timeout = 150, int iterations = 500);
 
 	void run();
 

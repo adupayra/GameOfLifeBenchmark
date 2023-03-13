@@ -27,6 +27,7 @@ GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode
 		if (dimension != 2) {
 			std::cerr << "CPUAlt is not available in 3D, switching with CPU" << std::endl;
 			GameManager::m_gameInstance = new GameCPU(dimension, cellsPerDim);
+			processMode = CPU;
 		}
 		else {
 			GameManager::m_gameInstance = new GameCPUAlt(dimension, cellsPerDim);
@@ -46,6 +47,7 @@ GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode
 	default:
 		std::cerr << "Requested process mode wasn't found, loading CPU" << std::endl;
 		GameManager::m_gameInstance = new GameCPU(dimension, cellsPerDim);
+		processMode = CPU;
 	}
 
 	m_graphicsDisplay = NULL;
@@ -84,15 +86,10 @@ void GameManager::run() {
 ProcessData GameManager::runBench(int iterations, double timeout) {
 	
 	int i = 0;
-	while (!m_processData->getIsTimedout() && i < iterations) {
+	while (i < iterations) {
 		m_processData->startMeasurements();
 		m_gameInstance->step();
 		m_processData->endMeasurements();
-
-		if (m_processData->getExecTime() > timeout) {
-			m_processData->setIsTimedout(true);
-
-		}
 		i++;
 	}
 	m_processData->computeMeans();

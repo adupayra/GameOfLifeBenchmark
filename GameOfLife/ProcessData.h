@@ -10,8 +10,6 @@ class ProcessData
 private:
 	ProcessMode m_mode;
 
-	bool m_isTimedout = false;
-
     ULONGLONG uOldIdle = 0;
     ULONGLONG uOldKrnl = 0;
     ULONGLONG uOldUsr = 0;
@@ -53,10 +51,6 @@ public:
     int getCpuUsage() {
         return m_cpuUsages.back();
     }
-
-    bool getIsTimedout() { return m_isTimedout; }
-
-    void setIsTimedout(bool value) { m_isTimedout = value; }
 
 	ProcessData(ProcessMode mode);
 

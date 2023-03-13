@@ -101,7 +101,7 @@ void ProcessData::computeMeans() {
     for (int i = 0; i < m_cpuUsages.size(); i++) {
         sumCpu += m_cpuUsages[i];
     }
-    m_cpuUsageMean = sumCpu / m_execTimes.size();
+    m_cpuUsageMean = sumCpu / m_cpuUsages.size();
 }
 
 std::string ProcessData::convertToString(ProcessMode mode) {
