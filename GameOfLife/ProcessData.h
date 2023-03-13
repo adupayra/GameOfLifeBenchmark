@@ -31,6 +31,9 @@ private:
     double m_cpuUsageMean = 0;
 
     double m_execMean = 0;
+
+    void printLastErrorString(DWORD errorMessage);
+
 public:
 
     void computeMeans();
@@ -50,11 +53,18 @@ public:
     int getCpuUsage() {
         return m_cpuUsages.back();
     }
+
+    bool getIsTimedout() { return m_isTimedout; }
+
+    void setIsTimedout(bool value) { m_isTimedout = value; }
+
 	ProcessData(ProcessMode mode);
 
     void startMeasurements();
 
     void endMeasurements();
+
+    static std::string convertToString(ProcessMode mode);
 
 
 

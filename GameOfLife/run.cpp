@@ -2,10 +2,14 @@
 #include "Benchmark.h"
 
 int main(int argc, const char* argv) {
-	//srand(31231);
-	GameManager gameManager(2, 2048, CPUThreads);
+	bool benchmark = true;
+	if (benchmark) {
+		Benchmark bench;
+		bench.runBenchmark(2, std::vector<ProcessMode>{CPU, CPUAlt, CPUThreads, CPUThreadP, GPU}, 200, 5000);
+	}
+	else {
+		GameManager gameManager(2, 200, GPU);
+		gameManager.run();
+	}
 
-	//Benchmark(2, std::vector<ProcessMode>{CPU, CPUAlt, CPUThreads, CPUThreadP, GPU}, 200, 5000, false);
-
-	gameManager.run();
 }

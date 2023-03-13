@@ -11,22 +11,16 @@ private:
 
 	Game* m_gameInstance;
 
-	bool m_isBenchmarking;
-
-	double m_meanTime;
+	bool m_isBenchmarking = false;
 
 	ProcessData* m_processData;
 
 public:
 	GameManager(int, int, ProcessMode, bool benchmarking = false, int gpuThreads = 256, double timeout = 500, int iterations = 500);
 
-	const ProcessData* getProcessData() { return m_processData; }
-
-	double getMeantime() { return m_meanTime;}
-
 	void run();
 
-	bool runBench(int, double);
+	ProcessData runBench(int, double);
 	
 	~GameManager();
 };

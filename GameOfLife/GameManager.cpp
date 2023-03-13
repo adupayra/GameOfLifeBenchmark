@@ -17,7 +17,7 @@ GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode
 	}
 
 	m_isBenchmarking = benchmarking;
-	m_meanTime = 0;
+
 	switch (processMode)
 	{
 	case CPU:
@@ -48,17 +48,13 @@ GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode
 		GameManager::m_gameInstance = new GameCPU(dimension, cellsPerDim);
 	}
 
+	m_graphicsDisplay = NULL;
 	if (!benchmarking) {
 		if (dimension == 2)
 			GameManager::m_graphicsDisplay = new Graphics2D(600, 512, dimension, cellsPerDim);
 	}
 
 	m_processData = new ProcessData(processMode);
-
-	//if (benchmarking)
-	//	runBench(iterations, timeout);
-	//else
-	//	run();
 }
 
 GameManager::~GameManager() {
@@ -68,16 +64,11 @@ GameManager::~GameManager() {
 }
 
 void GameManager::run() {
-	//using std::chrono::high_resolution_clock;
-	//using std::chrono::duration_cast;
-	//using std::chrono::duration;
-	//using std::chrono::milliseconds;
 
 	int i = 1;
 	while (!m_graphicsDisplay->m_windowManager->isClosedState()) {
 
-		std::cout << "Iteration " << i << std::endl;
-
+		//std::cout << "Iteration " << i << std::endl;
 
 		m_processData->startMeasurements();
 		m_gameInstance->step();
@@ -90,35 +81,21 @@ void GameManager::run() {
 	}
 }
 
-bool GameManager::runBench(int iterations, double timeout) {
-	using std::chrono::high_resolution_clock;
-	using std::chrono::duration_cast;
-	using std::chrono::duration;
-	using std::chrono::milliseconds;
+ProcessData GameManager::runBench(int iterations, double timeout) {
 	
-	bool isTimedout = false;
-	std::vector<double> times;
 	int i = 0;
-	while (!isTimedout && i < iterations) {
-		//std::cout << "Iteration " << i << std::endl;
-
-		auto t1 = high_resolution_clock::now();
+	while (!m_processData->getIsTimedout() && i < iterations) {
+		m_processData->startMeasurements();
 		m_gameInstance->step();
-		auto t2 = high_resolution_clock::now();
+		m_processData->endMeasurements();
 
-		duration<double, std::milli> ms_double = t2 - t1;
-		if (ms_double.count() > timeout)
-			isTimedout = true;
-		//std::cout << "Cells update time: " << ms_double.count() << "ms\n";
-		times.push_back(ms_double.count());
+		if (m_processData->getExecTime() > timeout) {
+			m_processData->setIsTimedout(true);
+
+		}
 		i++;
 	}
+	m_processData->computeMeans();
 
-	double sum = 0;
-	for (int j = 0; j < times.size(); ++j) {
-		sum += times[j];
-	}
-	//m_processData.m_meanTime = sum / times.size();
-	m_meanTime = sum / times.size();
-	return isTimedout;
+	return *m_processData;
 }
