@@ -10,7 +10,7 @@ Benchmark::Benchmark(std::string filename, int seed)
 
 void Benchmark::runBenchmark(int dimension, std::vector<ProcessMode> modes, int firstSize, int lastSize, bool gpuThreadsbm, int gpuThreads, int iterations, float timeout, int sizeStep) {
 	m_benchmarkFile.open(m_filename);
-	m_benchmarkFile << "Seed\n" << m_seed << "\nIterations;";
+	m_benchmarkFile << "Seed\n" << m_seed << "\nIterations;" << iterations << "\n\n";
 	std::vector<ProcessData> benchmarkData;
 	if (!gpuThreadsbm)
 	{
@@ -40,7 +40,8 @@ void Benchmark::runBenchmark(int dimension, std::vector<ProcessMode> modes, int 
 					std::cout << "timeout " << 0 << std::endl;
 					m_benchmarkFile << data.getExecMean() << ";" << data.getCpuUsageMean() << ";;";
 				}
-				else {
+				else 
+				{
 					std::cout << "timeout " << 1 << std::endl;
 					m_benchmarkFile << -1 << ";" << -1 << ";;";
 					skippedj.push_back(j);
@@ -53,22 +54,23 @@ void Benchmark::runBenchmark(int dimension, std::vector<ProcessMode> modes, int 
 	}
 	else
 	{
-		for (int j = 32; j < 1024; j = pow(j, 2)) {
+		for (int j = 32; j <= 1024; j *= 2) {
 			m_benchmarkFile << j << ";";
 		}
+		m_benchmarkFile << "\n";
 		std::vector<int> skippedj;
 		for (int i = firstSize; i < lastSize; i += sizeStep)
 		{
 			std::cout << "Size: " << i << std::endl;
 			m_benchmarkFile << i << ";";
-			for (int j = 32; j < 1024; j = pow(j, 2))
+			for (int j = 32; j <= 1024; j *= 2)
 			{
 				std::cout << "Nb threads: " << j << std::endl;
 				if (std::find(skippedj.begin(), skippedj.end(), j) != skippedj.end()) {
 					m_benchmarkFile << -1 << ";";
 					continue;
 				}
-				GameManager instance(dimension, i, modes[j], true);
+				GameManager instance(dimension, i, GPU, true, j);
 				ProcessData data = instance.runBench(iterations, timeout);
 				benchmarkData.push_back(data);
 				std::cout << "exec time: " << data.getExecMean() << std::endl;

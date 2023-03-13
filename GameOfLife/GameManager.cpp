@@ -32,6 +32,7 @@ GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode
 		else {
 			GameManager::m_gameInstance = new GameCPUAlt(dimension, cellsPerDim);
 		}
+		break;
 	case CPUThreads:
 		GameManager::m_gameInstance = new GameCPUThreads(dimension, cellsPerDim);
 		break;

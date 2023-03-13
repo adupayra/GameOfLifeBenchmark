@@ -2,14 +2,13 @@
 #include "Benchmark.h"
 
 int main(int argc, const char* argv) {
-	bool benchmark = true;
+	bool benchmark = false;
 	if (benchmark) {
-		Benchmark bench("test2.csv");
-		bench.runBenchmark(2, std::vector<ProcessMode>{CPU, CPUAlt, CPUppl, CPUThreads, CPUThreadP, GPU}, 200, 5000, true);
+		Benchmark bench("test3.csv");
+		bench.runBenchmark(2, std::vector<ProcessMode>{CPUAlt, CPUThreads}, 1000, 5000);
 	}
 	else {
-		GameManager gameManager(2, 200, GPU);
+		GameManager gameManager(2, 6000, CPUAlt);
 		gameManager.run();
 	}
-
 }
