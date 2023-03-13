@@ -29,7 +29,7 @@ void ProcessData::startMeasuringCPU() {
     FILETIME ftIdle, ftKrnl, ftUsr;
 
     if (!GetSystemTimes(&ftIdle, &ftKrnl, &ftUsr)) {
-        GetLastError();
+        printLastErrorString(GetLastError());
         exit(EXIT_FAILURE);
     }
     uOldIdle = convertFiletime(ftIdle);
@@ -47,7 +47,7 @@ void ProcessData::computeCPUUsage()
     FILETIME ftIdle, ftKrnl, ftUsr;
     if (!GetSystemTimes(&ftIdle, &ftKrnl, &ftUsr))
     {
-        GetLastError();
+        printLastErrorString(GetLastError());
         exit(EXIT_FAILURE);
     }
     ULONGLONG uIdle = convertFiletime(ftIdle);
