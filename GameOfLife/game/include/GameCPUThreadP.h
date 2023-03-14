@@ -11,6 +11,6 @@ private:
 
 public:
     GameCPUThreadP(int, int);
-    ~GameCPUThreadP() { delete m_threadPool; }
+    ~GameCPUThreadP() override { delete m_threadPool; }
 };
 

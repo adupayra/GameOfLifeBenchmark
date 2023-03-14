@@ -4,6 +4,15 @@
 #include <algorithm>
 #include <iostream>
 
+void gpuAssert(cudaError_t code)
+{
+	if (code != cudaSuccess)
+	{
+		fprintf(stderr, "GPUassert: %s %s %d\n", cudaGetErrorString(code));
+		exit(EXIT_FAILURE);
+	}
+}
+
 __global__ void processCellKernel(uint8_t* cells, uint8_t* newCells, int dimensions, int cellsPerDim, int nbCells) {
 	int cellID = threadIdx.x + blockIdx.x * blockDim.x;
 
@@ -40,8 +49,9 @@ __global__ void processCellKernel(uint8_t* cells, uint8_t* newCells, int dimensi
 void processCells(uint8_t*& cells, uint8_t*& devCells, uint8_t*& devNewCells, int dimensions, int cellsPerDim, int nbCells, int nbBlocks, int nbThreads) {
 
 	processCellKernel << <nbBlocks, nbThreads >> > (devCells, devNewCells, dimensions, cellsPerDim, nbCells);
-	cudaDeviceSynchronize();
-	cudaMemcpy(cells, devNewCells, nbCells, cudaMemcpyDeviceToHost);
+	gpuAssert(cudaPeekAtLastError());
+	gpuAssert(cudaDeviceSynchronize());
+	gpuAssert(cudaMemcpy(cells, devNewCells, nbCells, cudaMemcpyDeviceToHost));
 	std::swap(devCells, devNewCells);
 
 }

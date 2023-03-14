@@ -10,7 +10,7 @@ Benchmark::Benchmark(std::string filename, int seed)
 
 void Benchmark::runBenchmark(int dimension, std::vector<ProcessMode> modes, int firstSize, int lastSize, bool gpuThreadsbm, int gpuThreads, int iterations, float timeout, int sizeStep) {
 	m_benchmarkFile.open(m_filename);
-	m_benchmarkFile << "Seed\n" << m_seed << "\nIterations;" << iterations << "\n\n";
+	m_benchmarkFile << "Seed\n" << m_seed << "\nIterations;" << iterations << "\n\nWorld size\\Process method;";
 	std::vector<ProcessData> benchmarkData;
 	if (!gpuThreadsbm)
 	{

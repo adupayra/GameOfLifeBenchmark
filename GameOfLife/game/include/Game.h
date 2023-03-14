@@ -27,6 +27,6 @@ public:
 
 	void step();
 
-	~Game();
+	virtual ~Game();
 };
 

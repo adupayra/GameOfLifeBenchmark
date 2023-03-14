@@ -43,7 +43,7 @@ GameManager::GameManager(int dimension, int cellsPerDim, ProcessMode processMode
 		GameManager::m_gameInstance = new GameCPUThreadP(dimension, cellsPerDim);
 		break;
 	case GPU:
-		GameManager::m_gameInstance = new GameGPU(dimension, cellsPerDim);
+		GameManager::m_gameInstance = new GameGPU(dimension, cellsPerDim, gpuThreads);
 		break;
 	default:
 		std::cerr << "Requested process mode wasn't found, loading CPU" << std::endl;

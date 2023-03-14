@@ -4,8 +4,8 @@ class GameGPU :
     public Game
 {
 public:
-    GameGPU(int dimensions, int cellsPerDim);
-    ~GameGPU();
+    GameGPU(int dimensions, int cellsPerDim, int nbThreads);
+    ~GameGPU() override;
 private:
     void process();
     uint8_t* m_devCells;
