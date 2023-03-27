@@ -27,7 +27,7 @@ void Benchmark::runBenchmark(int dimension, std::vector<ProcessMode> modes, int 
 			for (int j = 0; j < modes.size(); j++)
 			{
 				if (std::find(skippedj.begin(), skippedj.end(), j) != skippedj.end()) {
-					m_benchmarkFile << -1 << ";" << -1 << ";;";
+					m_benchmarkFile << ";;;";
 					continue;
 				}
 				std::cout << ProcessData::convertToString(modes[j]) << std::endl;
@@ -37,13 +37,11 @@ void Benchmark::runBenchmark(int dimension, std::vector<ProcessMode> modes, int 
 				std::cout << "exec time: " << data.getExecMean() << std::endl;
 				std::cout << "cpu usage: " << data.getCpuUsageMean() << std::endl;
 				if (data.getExecMean() < timeout) {
-					std::cout << "timeout " << 0 << std::endl;
 					m_benchmarkFile << data.getExecMean() << ";" << data.getCpuUsageMean() << ";;";
 				}
 				else 
 				{
-					std::cout << "timeout " << 1 << std::endl;
-					m_benchmarkFile << -1 << ";" << -1 << ";;";
+					m_benchmarkFile << ";;;";
 					skippedj.push_back(j);
 				}
 				std::cout << std::endl;
@@ -67,7 +65,7 @@ void Benchmark::runBenchmark(int dimension, std::vector<ProcessMode> modes, int 
 			{
 				std::cout << "Nb threads: " << j << std::endl;
 				if (std::find(skippedj.begin(), skippedj.end(), j) != skippedj.end()) {
-					m_benchmarkFile << -1 << ";";
+					m_benchmarkFile << ";";
 					continue;
 				}
 				GameManager instance(dimension, i, GPU, true, j);
@@ -75,12 +73,10 @@ void Benchmark::runBenchmark(int dimension, std::vector<ProcessMode> modes, int 
 				benchmarkData.push_back(data);
 				std::cout << "exec time: " << data.getExecMean() << std::endl;
 				if (data.getExecMean() < timeout) {
-					std::cout << "timeout " << 0 << std::endl;
 					m_benchmarkFile << data.getExecMean() << ";";
 				}
 				else {
-					std::cout << "timeout " << 1 << std::endl;
-					m_benchmarkFile << -1;
+					m_benchmarkFile << ";";
 					skippedj.push_back(j);
 				}
 				std::cout << std::endl;
