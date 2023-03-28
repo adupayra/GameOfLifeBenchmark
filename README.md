@@ -13,6 +13,7 @@ The grid of cells is represented using a one dimensionnal array of bytes. The on
 This project being pretty simple overall, there is not really any technical details to be given. This implementation was made following MVC pattern to dissociate the UI from 
 the model. While the render part simply consists of a rectangle on which we apply a texture. This texture is generated thanks to the grid of cells provided by the model. <br>
 Here is a screenshot of one generation in a world composed of 1 048 576 cells:
+![image](https://user-images.githubusercontent.com/55114282/228110492-ce99012a-4f82-448b-8816-4ca1b3205545.png)
 
 ## Comparison of different methods in the computation of the new generation
 
@@ -60,7 +61,8 @@ Here is an example of benchmark to compare the different methods:
 ![image](https://user-images.githubusercontent.com/55114282/228109786-81969afd-76bb-4b01-a239-b13f8d9b37d9.png)
 
 We can see expected results:
-Mono thread CPU is the slowest, followed by the method using Parallel Patterns Library, then CPU multithreading without threadpool, followed by the version using a threadpool, with finally the GPU accelerated version. <br> <br>
+Mono thread CPU is the slowest, followed by the method using Parallel Patterns Library, then CPU multithreading without threadpool, followed by the version using a threadpool, with finally the GPU accelerated version.<br>
+We can also notice that the alternative algorithm is giving very poor results. <br> <br>
 
 Regarding the GPU acceleration threads per blocks comparison, here is a benchmark example:
 ![image](https://user-images.githubusercontent.com/55114282/228110085-9d325bed-773d-4e9e-a27a-af27a37a9f00.png)
