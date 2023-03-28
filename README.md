@@ -39,8 +39,34 @@ platform dependant, and as we will see with the benchmark, not the most performa
 
 ### Multi threading with C++ standard library's threads
 
-This approach is also quite easy to implement in this case. The principle is to divide the array of cells into as much thread as the hardware can handle 
-- Multi threading using 
+This approach is also quite easy to implement in this case. The principle is to divide the array of cells into as much threads as the OS and hardware can offer. Each thread will then process the new state of the cells that is attributed to it.
+
+### Multi threading with C++ standard library's threads and threadpool
+
+Here, a threadpool is implemented to avoid destroying and creating threads at every new generations.
+
+### GPU acceleration using CUDA
+
+With this method, it is required to decide the number of threads to use per block. To do so, the benchmark tool is also used.
+
+## Benchmark tool
+
+This tool is quite simple, it allows to compare the performance of different methods (or in the case of GPU acceleration, different numbers of threads per block) as well as 
+profiling different information (for now, the only information available is the average percentage of CPU used during the computation on top of the average execution time).<br> <br>
+It will start an instance of a game of life and compute iterations for a fixed number of generations for the methods that we want to compare, and store the results in a CSV file. The world size gets increased and the process is repeated until the world size threshold is reached. <br>
+
+Here is an example of benchmark to compare the different methods:
+
+![image](https://user-images.githubusercontent.com/55114282/228109786-81969afd-76bb-4b01-a239-b13f8d9b37d9.png)
+
+We can see expected results:
+Mono thread CPU is the slowest, followed by the method using Parallel Patterns Library, then CPU multithreading without threadpool, followed by the version using a threadpool, with finally the GPU accelerated version. <br> <br>
+
+Regarding the GPU acceleration threads per blocks comparison, here is a benchmark example:
+![image](https://user-images.githubusercontent.com/55114282/228110085-9d325bed-773d-4e9e-a27a-af27a37a9f00.png)
+
+We can see here that the number of threads per block doesn't change much the results unless it is 32.
+
 ## Going further
 
 To enhance this project features, I thought of multiple options:
