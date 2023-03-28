@@ -1,6 +1,6 @@
-# GameOfLifeOpenGL (March 2023)
+# GameOfLifeBenchmark (March 2023)
 
-While the aim of this project was to provide an implementation of the Game Of Life with a GUI developped with OpenGL, the main focus is to compare different
+The aim of this project was to provide an implementation of the Game Of Life with a GUI developped with OpenGL as well as to compare different
 approaches to speed up the evaluation of the grid of cells. <br>
 Many different approaches relying on parallelization were studied and a benchmarking tool was implemented to efficiently compare them.
 
