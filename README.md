@@ -80,5 +80,6 @@ To enhance this project features, I thought of multiple options:
 - For now, each cell is represented by one byte, while we only store either 0 or 1 in this integer. Finding a way to store one bit for each cell (or 8 cells for one byte), 
 would reduce the amount of Ram used by 8 and maybe allow faster computation depending on the implementation.
 - Improving the mono threading CPU algorithm based on the evaluation of the neighbourhood of living cells only.
+- Add a SIMD version
 
 These improvements might be added in the future if I ever get back on this project.
